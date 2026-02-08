@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <!-- Header-->
+    {% load static %}
+
+        <section class="hw-hero" style="--hw-hero-image: url('{% static 'assets/hero.jpg' %}');">
+        <div class="hw-hero__bg" aria-hidden="true"></div>
+        <div class="container px-4 px-lg-5 hw-hero__inner">
+
+            <!-- Headline glass panel -->
+            <div class="hw-hero__headline">
+            <h1>Lets find your<br/>perfect car</h1>
+            </div>
+
+            <!-- Search module -->
+            <div class="hw-search">
+            <!-- Mobile: collapsible header -->
+                <button
+                    class="hw-search__toggle"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#hwSearchBody"
+                    aria-expanded="true"
+                    aria-controls="hwSearchBody"
+                >
+                    <span class="hw-search__toggle-title">Find a vehicle</span>
+                    <span class="hw-search__toggle-icon" aria-hidden="true"></span>
+                </button>
+
+                <div id="hwSearchBody" class="collapse show">
+                    <div class="hw-search__panel">
+                        <div class="hw-search__shell">
+                            <div class="hw-search__tabs">
+                                <button class="hw-tab is-active" type="button">Purchase</button>
+                                <button class="hw-tab" type="button">Finance</button>
+                            </div>
+                            <form id="hwSearchForm" class="hw-search__form">
+                                <div class="hw-field">
+                                <!-- NEW/USED (scrollable) -->
+                                <div class="hw-field__label">New/Used</div>
+                                <div class="dropdown">
+                                <button class="hw-field__control dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    New
+                                </button>
+                                <ul class="dropdown-menu hw-menu">
+                                    <li><a class="dropdown-item" href="#">New</a></li>
+                                    <li><a class="dropdown-item" href="#">Used</a></li>
+                                    <li><a class="dropdown-item" href="#">All</a></li>
+                                </ul>
+                                </div>
+                            </div>
+
+                            <!-- BRANDS (scrollable) -->
+                            <div class="hw-field">
+                                <div class="hw-field__label">Brands</div>
+                                <div class="dropdown">
+                                <button class="hw-field__control dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    Brands
+                                </button>
+                                <ul class="dropdown-menu hw-menu hw-menu--scroll">
+                                    <li><a class="dropdown-item" href="#">Aston Martin</a></li>
+                                    <li><a class="dropdown-item" href="#">Audi</a></li>
+                                    <li><a class="dropdown-item" href="#">BMW</a></li>
+                                    <li><a class="dropdown-item" href="#">Bentley</a></li>
+                                    <li><a class="dropdown-item" href="#">Cupra</a></li>
+                                    <li><a class="dropdown-item" href="#">Ford</a></li>
+                                    <li><a class="dropdown-item" href="#">Hyundai</a></li>
+                                    <li><a class="dropdown-item" href="#">Jaguar</a></li>
+                                    <li><a class="dropdown-item" href="#">Land Rover</a></li>
+                                    <li><a class="dropdown-item" href="#">Lexus</a></li>
+                                    <li><a class="dropdown-item" href="#">Mercedes-Benz</a></li>
+                                    <li><a class="dropdown-item" href="#">Porsche</a></li>
+                                    <li><a class="dropdown-item" href="#">Tesla</a></li>
+                                    <li><a class="dropdown-item" href="#">Volvo</a></li>
+                                </ul>
+                                </div>
+                            </div>
+
+                            <!-- MODELS (scrollable) -->
+                            <div class="hw-field">
+                                <div class="hw-field__label">Models</div>
+                                <div class="dropdown">
+                                <button class="hw-field__control dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    Models
+                                </button>
+                                <ul class="dropdown-menu hw-menu hw-menu--scroll">
+                                    <li><a class="dropdown-item" href="#">Model 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Model 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Model 3</a></li>
+                                    <li><a class="dropdown-item" href="#">Model 4</a></li>
+                                    <li><a class="dropdown-item" href="#">Model 5</a></li>
+                                    <li><a class="dropdown-item" href="#">Model 6</a></li>
+                                </ul>
+                                </div>
+                            </div>
+
+                            <!-- PRICE RANGE -->
+                            <div class="hw-field">
+                                <div class="hw-field__label">Price Range</div>
+                                <div class="dropdown">
+                                <button class="hw-field__control dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    Price Range
+                                </button>
+                                <ul class="dropdown-menu hw-menu">
+                                    <li><a class="dropdown-item" href="#">Up to £10,000</a></li>
+                                    <li><a class="dropdown-item" href="#">£10,000–£25,000</a></li>
+                                    <li><a class="dropdown-item" href="#">£25,000–£50,000</a></li>
+                                    <li><a class="dropdown-item" href="#">£50,000+</a></li>
+                                </ul>
+                                </div>
+                            </div>
+
+                            <!-- CTA -->
+                            <!-- Mobile CTA (visible even when collapsed) -->
+                            <button class="hw-search__cta hw-search__cta--mobile" type="submit" form="hwSearchForm">
+                                <span>Search for 3,493 cars</span>
+                                <span class="hw-search__cta-icon" aria-hidden="true">→</span>
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </section>
+
+<!-- Start of Brands section-->  
+
+        <section class="hw-brands">
+            <div class="container px-4 px-lg-5">
+                <div class="hw-brands__header">
+                <h2 class="hw-brands__title">Browse By Brand</h2>
+
+                <a class="hw-brands__viewall btn btn-dark"
+                    href="{% url 'home' %}">
+                    View all
+                </a>
+                </div>
+
+                <div class="hw-brands__grid">
+                {% for brand in brands %}
+                    <a class="hw-brand-tile"
+                    href="{% url 'home' %}?brand={{ brand.slug }}"
+                    aria-label="Browse {{ brand.name }}">
+                    <div class="hw-brand-tile__inner">
+                        {% if brand.logo %}
+                        <img class="hw-brand-tile__logo"
+                            src="{{ brand.logo.url }}"
+                            alt="{{ brand.name }} logo">
+                        {% else %}
+                        <div class="hw-brand-tile__fallback">{{ brand.name|slice:":1" }}</div>
+                        {% endif %}
+                        <div class="hw-brand-tile__name">{{ brand.name }}</div>
+                    </div>
+                    </a>
+                {% endfor %}
+                </div>
+
+                <div class="hw-brands__mobile-actions">
+                <a class="hw-brands__viewall btn btn-dark w-100"
+                    href="{% url 'home' %}">
+                    View all
+                </a>
+                </div>
+            </div>
+        </section>
+
+<!-- End of Brands section-->        
+        
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="hw-brands__header">
+                        <h2 class="hw-brands__title">View Our Latest Cars In Stock!</h2>
+                        <a class="hw-brands__viewall btn btn-dark"
+                            href="{% url 'home' %}">
+                            View all
+                        </a>
+                </div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for product in products %}
+                        {% if product.is_sale %}
+                        
+                        <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-left">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Product brand-->
+                                    <p class="text-muted mb-2">{{ product.brand.name }}</p>
+                                    <!-- Product tags-->
+                                    <div class="product-tags">
+                                    {% for tag in product.tags.all %}
+                                        <span class="car-tag">{{ tag.name }}</span>
+                                    {% endfor %}
+                                    </div>
+                                    <!-- DIVIDER -->
+                                    <hr class="hw-card-divider">
+                                    <!-- Product price-->
+                                    <div class="hw-card-footer mt-auto">
+                                        <div class="hw-card-price">
+                                            <span class="hw-card-price-main"><strike style="color: gray;">
+                                                £{{ product.price }}
+                                                </strike> &nbsp; 
+                                                <span style="color: crimson;">
+                                                    £{{ product.sale_price }}
+                                                </span>
+                                            </span>
+                                        </div>
+                                     </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="hw-card-actions">
+                                    <a class="hw-card-btn hw-card-btn--primary" href="{% url 'product' product.id %}">
+                                    <span>Take a closer look</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+
+                                    <a class="hw-card-btn hw-card-btn--secondary" href="#">
+                                    <span>Reserve for £2000</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        {% else %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-left">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Product tags-->
+                                    <div class="product-tags">
+                                    {% for tag in product.tags.all %}
+                                        <span class="car-tag">{{ tag.name }}</span>
+                                    {% endfor %}
+                                    </div>
+                                    <!-- DIVIDER -->
+                                    <hr class="hw-card-divider">
+                                    <!-- Product price-->
+                                     <div class="hw-card-footer mt-auto">
+                                        <div class="hw-card-price">
+                                            <span class="hw-card-price-main">£{{ product.price }}</span>
+                                        </div>
+                                     </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="hw-card-actions">
+                                    <a class="hw-card-btn hw-card-btn--primary" href="{% url 'product' product.id %}">
+                                    <span>Take a closer look</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+
+                                    <a class="hw-card-btn hw-card-btn--secondary" href="#">
+                                    <span>Reserve for £2000</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {% endif %}
+                    {% endfor %}                       
+            </div>
+        </section>
+
+
+
+
+{% endblock %}       

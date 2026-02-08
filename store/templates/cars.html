@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Header-->
+        <header class="bg-light py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-dark">
+                    <h1 class="display-4">We’ve found <strong>{{ results_count }}</strong> cars</h1>
+                    <h2 class="display-5">available now</h2>
+                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                </div>
+            </div>
+        </header>
+<!--car results-->
+       <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="hw-brands__header">
+                        <h2 class="hw-brands__title">Browse By Brand</h2>
+                        <a class="hw-brands__viewall btn btn-dark"
+                            href="{% url 'home' %}">
+                            View all
+                        </a>
+ 
+{# cars.html #}
+
+<div class="hw-resultsbar">
+  <div class="hw-resultsbar__count">
+    We’ve found <strong>{{ results_count }}</strong> cars
+  </div>
+
+  <div class="hw-resultsbar__actions">
+    {# SORT dropdown #}
+    <div class="dropdown">
+      <button class="hw-resultsbar__btn dropdown-toggle" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+        Sort
+      </button>
+
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li>
+          <a class="dropdown-item"
+             href="?sort=featured{% if active.brand %}&brand={{ active.brand }}{% endif %}{% if active.sale %}&sale=1{% endif %}{% if active.min_price %}&min_price={{ active.min_price }}{% endif %}{% if active.max_price %}&max_price={{ active.max_price }}{% endif %}">
+            Featured
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item"
+             href="?sort=price_asc{% if active.brand %}&brand={{ active.brand }}{% endif %}{% if active.sale %}&sale=1{% endif %}{% if active.min_price %}&min_price={{ active.min_price }}{% endif %}{% if active.max_price %}&max_price={{ active.max_price }}{% endif %}">
+            Price: Low to High
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item"
+             href="?sort=price_desc{% if active.brand %}&brand={{ active.brand }}{% endif %}{% if active.sale %}&sale=1{% endif %}{% if active.min_price %}&min_price={{ active.min_price }}{% endif %}{% if active.max_price %}&max_price={{ active.max_price }}{% endif %}">
+            Price: High to Low
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item"
+             href="?sort=name_az{% if active.brand %}&brand={{ active.brand }}{% endif %}{% if active.sale %}&sale=1{% endif %}{% if active.min_price %}&min_price={{ active.min_price }}{% endif %}{% if active.max_price %}&max_price={{ active.max_price }}{% endif %}">
+            Name: A–Z
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {# FILTER offcanvas trigger #}
+    <button class="hw-resultsbar__btn" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#hwFilters"
+            aria-controls="hwFilters">
+      Filter
+    </button>
+  </div>
+</div>
+
+{# OFFCANVAS FILTER PANEL #}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="hwFilters" aria-labelledby="hwFiltersLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="hwFiltersLabel">Filters</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <form method="get" action="{% url 'cars' %}" class="hw-filters">
+      {# preserve current sort #}
+      <input type="hidden" name="sort" value="{{ active.sort }}"/>
+
+      <div class="mb-3">
+        <label class="form-label">Brand</label>
+        <select class="form-select" name="brand">
+          <option value="">All brands</option>
+          {% for b in brands %}
+            <option value="{{ b.slug }}" {% if active.brand == b.slug %}selected{% endif %}>
+              {{ b.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input class="form-check-input" type="checkbox" value="1" id="saleCheck" name="sale"
+               {% if active.sale %}checked{% endif %}>
+        <label class="form-check-label" for="saleCheck">On sale only</label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Min price</label>
+        <input class="form-control" type="number" step="0.01" name="min_price" value="{{ active.min_price }}">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Max price</label>
+        <input class="form-control" type="number" step="0.01" name="max_price" value="{{ active.max_price }}">
+      </div>
+
+      <div class="d-flex gap-2">
+        <button class="btn btn-dark w-100" type="submit">Apply filters</button>
+        <a class="btn btn-outline-dark w-100" href="{% url 'cars' %}">Clear</a>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+ 
+                    </div>
+                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for product in products %}
+                        {% if product.is_sale %}
+                        
+                        <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-left">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Product brand-->
+                                    <p class="text-muted mb-2">{{ product.brand.name }}</p>
+                                    <!-- Product tags-->
+                                    <div class="product-tags">
+                                    {% for tag in product.tags.all %}
+                                        <span class="car-tag">{{ tag.name }}</span>
+                                    {% endfor %}
+                                    </div>
+                                    <!-- DIVIDER -->
+                                    <hr class="hw-card-divider">
+                                    <!-- Product price-->
+                                    <div class="hw-card-footer mt-auto">
+                                        <div class="hw-card-price">
+                                            <span class="hw-card-price-main"><strike style="color: gray;">
+                                                £{{ product.price }}
+                                                </strike> &nbsp; 
+                                                <span style="color: crimson;">
+                                                    £{{ product.sale_price }}
+                                                </span>
+                                            </span>
+                                        </div>
+                                     </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="hw-card-actions">
+                                    <a class="hw-card-btn hw-card-btn--primary" href="{% url 'product' product.id %}">
+                                    <span>Take a closer look</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+
+                                    <a class="hw-card-btn hw-card-btn--secondary" href="#">
+                                    <span>Reserve for £2000</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        {% else %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-left">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Product tags-->
+                                    <div class="product-tags">
+                                    {% for tag in product.tags.all %}
+                                        <span class="car-tag">{{ tag.name }}</span>
+                                    {% endfor %}
+                                    </div>
+                                    <!-- DIVIDER -->
+                                    <hr class="hw-card-divider">
+                                    <!-- Product price-->
+                                     <div class="hw-card-footer mt-auto">
+                                        <div class="hw-card-price">
+                                            <span class="hw-card-price-main">£{{ product.price }}</span>
+                                        </div>
+                                     </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="hw-card-actions">
+                                    <a class="hw-card-btn hw-card-btn--primary" href="{% url 'product' product.id %}">
+                                    <span>Take a closer look</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+
+                                    <a class="hw-card-btn hw-card-btn--secondary" href="#">
+                                    <span>Reserve for £2000</span>
+                                    <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {% endif %}
+                    {% endfor %}                       
+            </div>
+        </section>
+<!--car results end-->
+{% endblock %}

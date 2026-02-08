@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hw-pdp">
+  <div class="container px-4 px-lg-5">
+
+    <!-- Breadcrumbs (Harwoods-like) -->
+    <nav class="hw-breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="{% url 'cars' %}">Cars</a>
+      <span aria-hidden="true">/</span>
+      <span class="hw-breadcrumb__current">{{ product.brand.name }}</span>
+      <span aria-hidden="true">/</span>
+      <span class="hw-breadcrumb__current">{{ product.name }}</span>
+    </nav>
+
+    <div class="row g-4 g-lg-5">
+      <!-- LEFT: Gallery -->
+      <div class="col-lg-7">
+        <div class="hw-gallery">
+          <div class="hw-gallery__main">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          </div>
+
+          <!-- Thumbnail rail (static for now; later: multiple images model) -->
+          <div class="hw-gallery__thumbs" aria-label="Gallery thumbnails">
+            <button class="hw-thumb is-active" type="button" aria-label="Thumbnail 1">
+              <img src="{{ product.image.url }}" alt="">
+            </button>
+            <button class="hw-thumb" type="button" aria-label="Thumbnail 2">
+              <img src="{{ product.image.url }}" alt="">
+            </button>
+            <button class="hw-thumb" type="button" aria-label="Thumbnail 3">
+              <img src="{{ product.image.url }}" alt="">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sticky purchase panel -->
+      <div class="col-lg-5">
+        <aside class="hw-pdp__summary">
+          <header class="hw-pdp__head">
+            <div class="hw-pdp__brand">{{ product.brand.name }}</div>
+            <h1 class="hw-pdp__title">{{ product.name }}</h1>
+
+            <!-- Meta row (placeholders until you add real fields) -->
+            <ul class="hw-pdp__meta" aria-label="Vehicle summary">
+              <li><span class="hw-meta__label">Condition</span><span class="hw-meta__value">Used</span></li>
+              <li><span class="hw-meta__label">Ref</span><span class="hw-meta__value">SKU-{{ product.id }}</span></li>
+            </ul>
+
+            <div class="hw-pdp__price">
+              {% if product.is_sale %}
+                <span class="hw-price__old">£{{ product.price }}</span>
+                <span class="hw-price__now" style="color: crimson;">£{{ product.sale_price }}</span>
+              {% else %}
+                <span class="hw-price__now">£{{ product.price }}</span>
+              {% endif %}
+            </div>
+          </header>
+
+          <!-- Finance tabs (PCP / HP like Harwoods) -->
+          <div class="hw-finance">
+            <div class="hw-finance__top">
+              <div class="hw-finance__title">Finance Calculator</div>
+              <a class="hw-finance__link" href="#">Finance Calculator</a>
+            </div>
+
+            <ul class="nav nav-pills hw-finance__tabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#pcp" type="button" role="tab">
+                  PCP
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#hp" type="button" role="tab">
+                  HP
+                </button>
+              </li>
+            </ul>
+
+            <div class="tab-content hw-finance__body">
+              <div class="tab-pane fade show active" id="pcp" role="tabpanel">
+                <div class="hw-finance__figure">
+                  <div class="hw-finance__big">£—/month</div>
+                  <div class="hw-finance__small">APR —%</div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="hp" role="tabpanel">
+                <div class="hw-finance__figure">
+                  <div class="hw-finance__big">£—/month</div>
+                  <div class="hw-finance__small">APR —%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTAs: reuse your Harwoods-style buttons -->
+          <div class="hw-pdp__ctas">
+            <a class="hw-card-btn hw-card-btn--primary" href="#">
+              <span>Enquire today</span>
+              <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+            </a>
+            <a class="hw-card-btn hw-card-btn--secondary" href="#">
+              <span>Reserve today for £2,000</span>
+              <span class="hw-card-btn__icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <!-- Description -->
+          {% if product.description %}
+          <div class="hw-pdp__desc">
+            <h2 class="hw-section-title">Overview</h2>
+            <p>{{ product.description }}</p>
+          </div>
+          {% endif %}
+        </aside>
+      </div>
+    </div>
+
+    <!-- LOWER: Features + Specification -->
+    <div class="row g-4 g-lg-5 hw-pdp__lower">
+      <div class="col-lg-7">
+        <section class="hw-panel">
+          <h2 class="hw-section-title">Features</h2>
+          <div class="hw-features">
+            {% for tag in product.tags.all %}
+              <div class="hw-feature">{{ tag.name }}</div>
+            {% empty %}
+              <div class="text-muted">No features listed yet.</div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+
+      <div class="col-lg-5">
+        <section class="hw-panel">
+          <h2 class="hw-section-title">Specification</h2>
+
+          <!-- Spec table (placeholders until you extend the model) -->
+          <dl class="hw-spec">
+            <div class="hw-spec__row">
+              <dt>Brand</dt>
+              <dd>{{ product.brand.name }}</dd>
+            </div>
+            <div class="hw-spec__row">
+              <dt>Category</dt>
+              <dd>{{ product.category.name }}</dd>
+            </div>
+            <div class="hw-spec__row">
+              <dt>Reference</dt>
+              <dd>SKU-{{ product.id }}</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
