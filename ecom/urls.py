@@ -25,3 +25,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
+from django.urls import re_path
+
+# ... your existing urlpatterns above ...
+
+# Serve media files on Render (DEBUG is False there)
+urlpatterns += [
+    re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
+]
