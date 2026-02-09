@@ -9,7 +9,10 @@ venv/
 
 # Django
 db.sqlite3
+HEAD
 staticfiles/
+taticfiles/
+3573dec (Update .gitignore to allow media uploads)
 
 # OS / editor
 .vscode/
