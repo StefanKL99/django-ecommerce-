@@ -1,10 +1,11 @@
 Django Car Marketplace (Harwoods-Inspired UI)
 ----
-A Django-based car marketplace web application inspired by the UX and visual design patterns of Harwoods.
-This project focuses on building a realistic vehicle browsing experience with brand filtering, sorting, product detail pages, and a modern, responsive UI.
+🔗 Live site:
+👉 https://django-ecommerce-project-d95o.onrender.com/
 
-The goal of this project is to explore full-stack Django development alongside UX-driven front-end design, using real-world dealership patterns as reference.
+A full-stack Django car marketplace inspired by the UX, layout, and interaction patterns of premium automotive dealerships such as Harwoods.
 
+This project explores how production-style filtering, sorting, and product discovery can be implemented in Django while maintaining a strong UX and visual design focus.
 🚗 Project Overview
 ---------
 This application allows users to:
@@ -79,13 +80,17 @@ Backend / Django
 
 - Assets: Django static & media handling
 
+- Deployment: Render
+
+- Static & Media: Django staticfiles + media handling
+
 📁 Project Structure (Simplified)
 -----------
 ecom/
 ├── manage.py
 ├── store/
-│   ├── models.py        # Product, Brand, Category, Tag, Order models
-│   ├── views.py         # Home, Cars, Product Detail views
+│   ├── models.py        # Product, Brand, Category, Tag, Order
+│   ├── views.py         # Home, Cars, Product views
 │   ├── urls.py          # App routing
 │   ├── admin.py         # Admin registrations
 │   └── templates/
@@ -99,6 +104,24 @@ ecom/
 │   └── assets/
 └── media/
     └── uploads/
+
+🌍 Live Deployment
+-------
+The project is deployed on Render and publicly accessible:
+
+👉 https://django-ecommerce-project-d95o.onrender.com/
+
+Deployment includes:
+
+- Static file handling
+
+- Media uploads
+
+- Django admin access
+
+- Production settings configuration
+
+
 
 ⚙️ Setup & Installation
 ---------
@@ -174,7 +197,7 @@ This project is designed to strengthen skills in:
 
 - Django MVC patterns
 
-- Queryset optimization
+- Queryset optimization for real datasets
 
 - UX-driven frontend architecture
 
